@@ -1,19 +1,62 @@
-
 package ru.geekbrains.project1.lessionone;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
 
     public static void main(String[] args) {
+
 
         method1();
         method2();
         method3();
         method4();
         method5();
+        arrays();
 
     }
+    public static String arrays(){
+
+        //arrays
+        int [] arr1 = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+        int i =0;
+        do {
+            if (i != 0) continue;
+            if (i>1) break;
+        } while ( i<10);
+
+        int [] arr2 = new int [8];
+        for (int l = 0; i<9; i++) {
+            for (int e =0; i<3; i++) {
+
+            }
+        }
+
+        int [] arr3 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        int q1 = 0;
+        do {
+            if(q1 < 6) {
+                q1= q1 *2;
+            }
+
+        }while (q1 <12);
+
+        int [] arr4 = new int[0];
+        int max  = 0;
+        int min =0;
+
+        for (max = 0; max <arr4.length; max++ ) {
+
+            return "max";
+
+        }
+        for (min = 0; max <arr4.length ; max-- ){
+            return "min";
+        }
+
+        return null;
+    }
+
+
 
     private static void method1() {
         //результат выражения (с/d) в скобках, одну из переменных нужно было вывести во float
