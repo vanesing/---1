@@ -1,124 +1,192 @@
 package ru.geekbrains.project1.lessionone;
 
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
+    private static int fieldSizeY;
+    private static int fieldSizeX;
+    private static char[][] field;
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final Random RANDOM = new Random();
+
+    private static final char HUMAN_DOT = 'X';
+    private static final char AI_DOT = 'O';
+    private static final char EMPTY_DOT = '.';
+
+    // init field
+    private static void initMap() {
+        fieldSizeY = 3;
+        fieldSizeX = 3;
+        field = new char[fieldSizeY][fieldSizeX];
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                field[y][x] = EMPTY_DOT;
+            }
+        }
+    }
+
+    // print field
+    private static void printMap() {
+        System.out.println("-------");
+        for (int y = 0; y < fieldSizeY; y++) {
+            System.out.print("|");
+            for (int x = 0; x < fieldSizeX; x++) {
+                System.out.print(field[y][x] + "|");
+            }
+            System.out.println();
+        }
+    }
+
+    // human turn
+    private static void humanTurn() {
+        int x;
+        int y;
+        do {
+            System.out.printf("Введите координаты хода X и Y (от 1 до %d) через пробел: ", fieldSizeX);
+            x = SCANNER.nextInt() - 1;
+            y = SCANNER.nextInt() - 1;
+        } while (!(isEmptyCell(y, x) && isValidCell(y, x)));
+        field[y][x] = HUMAN_DOT;
+    }
+
+    // is cell empty
+    private static boolean isEmptyCell(int y, int x) {
+        return field[y][x] == EMPTY_DOT;
+    }
+
+    // is cell valid
+    private static boolean isValidCell(int y, int x) {
+        return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
+    }
+
+    // ai turn
+    private static void aiTurn() {
+        int x;
+        int y;
+        do {
+            x = RANDOM.nextInt(fieldSizeX);
+            y = RANDOM.nextInt(fieldSizeY);
+        } while (!isEmptyCell(y, x));
+        field[y][x] = AI_DOT;
+    }
+
+    // check win
+    private static boolean checkWin(char c) {
+
+        int run ;
+        int toWin =3;
+        int countDia =0;
+        int countDia1 =0;
+
+        for (run=0;run<3;run++) {
+            if (checkLine(c,run)==toWin){
+               return true;
+            }
+
+            if ((field[run][run]) == HUMAN_DOT) {
+                countDia++;
+                if (countDia==toWin){
+                    return true;
+                }
+
+            }
+
+            if ((field[2-run][run]) == HUMAN_DOT) {
+                countDia1++;
+                if (countDia1==toWin){
+                    return true;
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+     private static int checkLine (char c, int l){
+        int countHor=0;
+        int countver=0;
+
+
+         for (int x =0; x<3; x++ ){
+             if ((field[l][x]) ==HUMAN_DOT){
+                 countHor++;
+             }
+         }
+         for (int y =0; y<3; y++ ){
+             if ((field[y][l]) ==HUMAN_DOT){
+                 countver++;
+             }
+         }
+
+
+        if (countHor==3){
+            return countHor;
+        }
+         if (countver==3){
+             return countver;
+         }
+     return 0;
+    }
+
+
+
+
+    // check draw
+    private static boolean isMapFull() {
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (isEmptyCell(y, x)) return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
+        while (true) {
+            initMap();
+            printMap();
+            while (true) {
+                humanTurn();
+                printMap();
 
-
-        method1();
-        method2();
-        method3();
-        method4();
-        method5();
-        arrays();
-
-    }
-    public static String arrays(){
-
-        //arrays
-        int [] arr1 = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
-        int i =0;
-        do {
-            if (i != 0) continue;
-            if (i>1) break;
-        } while ( i<10);
-
-        int [] arr2 = new int [8];
-        for (int l = 0; i<9; i++) {
-            for (int e =0; i<3; i++) {
-
+                if (gameChecks(HUMAN_DOT, "Human win!")) break;
+                aiTurn();
+                printMap();
+                if (gameChecks(AI_DOT, "AI win!")) break;
             }
+            System.out.println("Play again?");
+            if (!SCANNER.next().equals("Y"))
+                break;
         }
+        SCANNER.close();
 
-        int [] arr3 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        int q1 = 0;
-        do {
-            if(q1 < 6) {
-                q1= q1 *2;
-            }
-
-        }while (q1 <12);
-
-        int [] arr4 = new int[0];
-        int max  = 0;
-        int min =0;
-
-        for (max = 0; max <arr4.length; max++ ) {
-
-            return "max";
-
-        }
-        for (min = 0; max <arr4.length ; max-- ){
-            return "min";
-        }
-
-        return null;
+        int[] arr = {1,2,3,4,5,6,7};
+        arraySum("Hello", 0, arr);
+        arraySum("Hello", 0, new int[] {1,2,3,4,5,6,7});
+        arraySum("Hello", 0, 1,2,3,4,5,6,7);
     }
 
-
-
-    private static void method1() {
-        //результат выражения (с/d) в скобках, одну из переменных нужно было вывести во float
-        // потому, как результат их деления дает цифру с плавающей точкой
-
-        int a = 10;
-        int b = 20;
-        float c = 30;
-        int d = 40;
-        float f;
-        f = a * (b +  (c / d));
-        System.out.println(f);
-    }
-    private static void method2() {
-
-        // не совсем уверен что это верный код
-        // но по логике задания вроде то
-        //
-
-        int a = 0;
-        System.out.println("Введите первое число:" + a);
-
-        int b = 0;
-        System.out.println("Введите второе число:" + b);
-        int c = a + b;
-
-
-        if (c<10 || c<21) {
-            boolean b1 = true;
-        }else {
-            boolean b1 = false;
+    private static int arraySum(String s, int b, int... a) {
+        int r = 0;
+        for (int i = 0; i < a.length; i++) {
+            r += a[i];
         }
+        return r;
+    }
 
-       }
-
-       private static void  method3 () {
-        int p = 0;
-        System.out.println("Введите число для проверки:" + p);
-        if (p <0) System.out.println("Число отрицательное");
-        else if (p>0) System.out.println("Число положительное");
-
-
-
-       }
-       private static void method4() {
-        String t = new String();
-        System.out.println("Введите имя:" + t);
-        System.out.println("Привет,"+t);
-
-
-       }
-       private static void method5() {
-        int d =0;
-        System.out.println("Какой сейчас год?" +d);
-           if (d % 4 == 0) {
-               System.out.println("Високосный год");
-           }else if (d % 4 ==1) {
-               System.out.println("Год не високосный");
-           }
-           }
-       }
-
-
-
-
+    private static boolean gameChecks(char aiDot, String s) {
+        if (checkWin(aiDot)) {
+            System.out.println(s);
+            return true;
+        }
+        if (isMapFull()) {
+            System.out.println("draw!");
+            return true;
+        }
+        return false;
+    }
+}
