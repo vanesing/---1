@@ -7,18 +7,18 @@ import static java.lang.Integer.parseInt;
 public class Main {
     public static void main(String[] args) {
 
-       /* String [] words = new String[] {"Potato","Tomato","Watermelon","Dragonfruit","Tomato","Peach",
-                "Avocado","Melon","Tomato","Pineapple","Watermelon","Watermelon", "Kiwi","Broccoli"};*/
+        String [] words = new String[] {"Potato","Tomato","Watermelon","Dragonfruit","Tomato","Peach",
+                "Avocado","Melon","Tomato","Pineapple","Watermelon","Watermelon", "Kiwi","Broccoli"};
 
-       /* ArrayList <String> list = new ArrayList<>(Arrays.asList(words));
+        ArrayList <String> list = new ArrayList<>(Arrays.asList(words));
         for (int i = 0; i < words.length ; i++) {
             list.remove("Tomato");
             list.remove("Watermelon");
 
 
-        }*/
+        }
         //Вывод списка
-        //System.out.println(list);
+        System.out.println(list);
 
 
 
