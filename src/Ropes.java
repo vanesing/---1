@@ -1,6 +1,4 @@
 public class Ropes {
-
-
     public static void main (String... args){
         long a = System.currentTimeMillis();
         final Rope rope = new Rope();
